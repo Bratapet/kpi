@@ -13,16 +13,22 @@ import sys
 sys.path.append('./modules')
 import importincomingincs
 import importoutgoingincs
+import importincidentupdate
+import incidentssettoresolved
 "" '''
 # Global Variables =======================
 '''
-data = ["Import Incoming INCs", "Import Outgoing INCs"]
+data = ["Import Incoming INCs", "Import Outgoing INCs", "Import Incident Update", "Import Incidents Set To Resolved"]
 
 def methodselection(userselection,filename):
 	if userselection == 0:
 		importincomingincs.import_inc(filename)
 	if userselection == 1:
 		importoutgoingincs.import_inc(filename)
+	if userselection == 2:
+		importincidentupdate.importer(filename)
+	if userselection == 3:
+		incidentssettoresolved.importer(filename)
 
 def Main():
 	Tk().withdraw()
