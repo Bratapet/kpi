@@ -20,7 +20,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService']).controller('Inc
 		console.log('Error: ' + data);
 	};	
 
-	INCOMINGINC.get(successFunctionIncoming, failureFunctionIncoming);
-	OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing);
+	INCOMINGINC.get(successFunctionIncoming, failureFunctionIncoming, "2015");
+	OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing, "2015");
 
 });

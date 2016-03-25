@@ -1,7 +1,7 @@
 angular.module('IncomingService', []).factory('INCOMINGINC', ['$http', function($http) {
 	return {
-		get : function(onSuccuess,onFailure){
-			return $http.get('/api/INCOMINGINC').
+		get : function(onSuccuess,onFailure,date){
+			return $http.post('/api/INCOMINGINC', {"date":date} ).
 			success(onSuccuess).
 			error(onFailure);
 		}

@@ -6,7 +6,8 @@ module.exports = function(app) {
 	// server routes ===========================================================
 	// handle things like api calls
 	// authentication routes
-	app.get('/api/INCOMINGINC/:date', function(req, res){
+	app.get('/api/INCOMINGINC', function(req, res){
+		console.log(req.query['date'])
 		INCOMINGINC.find(function(err,IncomingINC){
 			if(err)
 				res.send(err);
@@ -15,8 +16,9 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/api/OUTGOINGINC/:date', function(req, res){
-		OUTGOINGINC.findOne(function(err, OutgoingINC){
+	app.get('/api/OUTGOINGINC', function(req, res){
+		console.log(req.Query['date'])
+		OUTGOINGINC.find(function(err, OutgoingINC){
 			if(err)
 				res.send(err);
 
