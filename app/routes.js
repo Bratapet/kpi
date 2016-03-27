@@ -6,9 +6,10 @@ module.exports = function(app) {
 	// server routes ===========================================================
 	// handle things like api calls
 	// authentication routes
-	app.get('/api/INCOMINGINC', function(req, res){
-		console.log(req.query['date'])
-		INCOMINGINC.find(function(err,IncomingINC){
+	app.post('/api/INCOMINGINC/', function(req, res){
+		
+		var date = req.body['date'];
+		INCOMINGINC.find({"date": new RegExp(date, "i")}, function(err,IncomingINC){
 			if(err)
 				res.send(err);
 
@@ -16,9 +17,10 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/api/OUTGOINGINC', function(req, res){
-		console.log(req.Query['date'])
-		OUTGOINGINC.find(function(err, OutgoingINC){
+	app.post('/api/OUTGOINGINC/', function(req, res){
+		
+		var date = req.body['date'];
+		OUTGOINGINC.find({"date" : new RegExp(date, "i")}, function(err, OutgoingINC){
 			if(err)
 				res.send(err);
 
