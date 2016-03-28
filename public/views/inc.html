@@ -1,7 +1,34 @@
 <highchart id="incomingChart" config="highchartsNG"></highchart>
 
-<div id="dateContainer">
-	<datetimepicker data-ng-model="date" data-datetimepicker-config="{startView: 'year', minView:'year', modelType: 'YYYY'}" data-on-set-time="setdate(date)"/>
+
+<div id="datecontainer">
+	<div>
+		<datetimepicker data-ng-model="date" data-datetimepicker-config="{startView: 'year', minView:'year', modelType: 'YYYY'}" data-on-set-time="setdate(date)"/>
+	</div>
+
+
+	<button ng-click="swapChartType()">Swap chart type</button>
+	<div id="selectedmonth">
+		Selected month: {{selectedmonth}}
+	</div>
+
 </div>
 
-<button ng-click="swapChartType()">Swap chart type</button>
+<div id="topsenders">
+	Senders: 
+	<div ng-repeat="(key,value) in topsenders" ng-if="key==selectedmonth">
+		<ul ng-repeat="(item, amount) in value">
+			<li>{{item}}:{{amount}}</li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="topreceivers">
+	Receivers: 
+	<div ng-repeat="(key,value) in topreceivers" ng-if="key==selectedmonth">
+		<ul ng-repeat="(item, amount) in value">
+			<li>{{item}}:{{amount}}</li>
+		</ul>
+	</div>
+</div>

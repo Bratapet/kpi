@@ -1,15 +1,44 @@
 angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng']).controller('IncomingOutgoingController', function($scope, INCOMINGINC, OUTGOINGINC, $rootScope) {
 	
 	$scope.date = "2015" //set standard date to dispaly
+	$scope.selectedmonth = "january"; // set standard month
+	
+	$scope.topreceivers = {};
+	$scope.topreceivers['january'] = {};
+	$scope.topreceivers['febuary'] = {};
+	$scope.topreceivers['march'] = {};
+	$scope.topreceivers['april'] = {};
+	$scope.topreceivers['may'] = {};
+	$scope.topreceivers['june'] = {};
+	$scope.topreceivers['july'] = {};
+	$scope.topreceivers['august'] = {};
+	$scope.topreceivers['september'] = {};
+	$scope.topreceivers['oktober'] = {};
+	$scope.topreceivers['november'] = {};
+	$scope.topreceivers['december'] = {};
+
+	$scope.topsenders = {}; //create top senders
+	$scope.topsenders['january'] = {};
+	$scope.topsenders['febuary'] = {};
+	$scope.topsenders['march'] = {};
+	$scope.topsenders['april'] = {};
+	$scope.topsenders['may'] = {};
+	$scope.topsenders['june'] = {};
+	$scope.topsenders['july'] = {};
+	$scope.topsenders['august'] = {};
+	$scope.topsenders['september'] = {};
+	$scope.topsenders['oktober'] = {};
+	$scope.topsenders['november'] = {};
+	$scope.topsenders['december'] = {};
 
 	$scope.highchartsNG = {
 		options:{
 			chart:{
-				type: 'column'
+				type: 'column',
 			},
 		},
 		xAxis: {
-			categories:["January","Febuary","March","April","May","June","July","August","September","November","December"]
+			categories:["january","febuary","march","april","may","june","july","august","September","November","December"]
 		},
 		yAxis:{
 			title:{
@@ -28,7 +57,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.highchartsNG.series = [];
 	}
 
-	$scope.addSeries = function(seriesname,data,top){
+	$scope.addSeries = function(seriesname,data){
 		$scope.highchartsNG.series.push({
 			name:seriesname,
 			data:[
@@ -43,22 +72,15 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 				data['oktober'],
 				data['november'],
 				data['december']
-				]
+				],
+			events:{
+				click:function(e){
+					console.log($scope.selectedmonth);
+					$scope.selectedmonth = e.point.category;
+					console.log($scope.selectedmonth);
+				}
+			}
 		});
-		$scope.highchartsNG.topcontrib = [
-				top['january'],
-				top['febuary'],
-				top['march'],
-				top['april'],
-				top['may'],
-				top['june'],
-				top['july'],
-				top['august'],
-				top['oktober'],
-				top['september'],
-				top['november'],
-				top['december']
-			];
 	}
 
 	successFunctionIncoming = function(data){
@@ -76,20 +98,6 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.nrofincomingincidents['oktober'] = 0;
 		$scope.nrofincomingincidents['november'] = 0;
 		$scope.nrofincomingincidents['december'] = 0;
-
-		$scope.topsenders = {};
-		$scope.topsenders['january'] = {};
-		$scope.topsenders['febuary'] = {};
-		$scope.topsenders['march'] = {};
-		$scope.topsenders['april'] = {};
-		$scope.topsenders['may'] = {};
-		$scope.topsenders['june'] = {};
-		$scope.topsenders['july'] = {};
-		$scope.topsenders['august'] = {};
-		$scope.topsenders['september'] = {};
-		$scope.topsenders['oktober'] = {};
-		$scope.topsenders['november'] = {};
-		$scope.topsenders['december'] = {};
 
 		for (i=0; i<data.length;i++){
 
@@ -181,7 +189,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 
 		}
 
-		$scope.addSeries('Incoming', $scope.nrofincomingincidents, $scope.topsenders);
+		$scope.addSeries('Incoming', $scope.nrofincomingincidents);
 
 	};
 
@@ -206,20 +214,6 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.nrofoutgoingincidents['oktober'] = 0;
 		$scope.nrofoutgoingincidents['november'] = 0;
 		$scope.nrofoutgoingincidents['december'] = 0;
-
-		$scope.topreceivers = {};
-		$scope.topreceivers['january'] = {};
-		$scope.topreceivers['febuary'] = {};
-		$scope.topreceivers['march'] = {};
-		$scope.topreceivers['april'] = {};
-		$scope.topreceivers['may'] = {};
-		$scope.topreceivers['june'] = {};
-		$scope.topreceivers['july'] = {};
-		$scope.topreceivers['august'] = {};
-		$scope.topreceivers['september'] = {};
-		$scope.topreceivers['oktober'] = {};
-		$scope.topreceivers['november'] = {};
-		$scope.topreceivers['december'] = {};
 
 		for(i=0;i<data.length;i++){
 			if (data[i].date === $scope.date+"/01"){
@@ -309,7 +303,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 			}
 		}
 
-		$scope.addSeries('Outgoing', $scope.nrofoutgoingincidents, $scope.topreceivers);
+		$scope.addSeries('Outgoing', $scope.nrofoutgoingincidents);
 	};
 
 	failureFunctionOutgoing = function(data){

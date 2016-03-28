@@ -1,1 +1,27 @@
 body { padding-top:30px; }
+
+#topreceivers{
+	right: 0;
+	float:right;
+	position: relative;
+	margin:0 auto;
+}
+
+#topsenders{
+	float:left;
+	left:0;
+	position: relative;
+	margin:0 auto;
+}
+
+#selectedmonth{
+	position: relative;
+	left: 0;
+	float:right;
+	margin:0 auto;
+}
+
+#datecontainer{
+	position: relative;
+	margin: 0 auto;
+}
