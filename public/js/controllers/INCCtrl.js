@@ -6,7 +6,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		options:{
 			chart:{
 				type: 'column'
-			}
+			},
 		},
 		xAxis: {
 			categories:["January","Febuary","March","April","May","June","July","August","September","November","December"]
@@ -17,6 +17,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 			}
 		},
 		series:[],
+		topcontrib:[],
 		title: {
 			text: "Incoming and Outgoing Incidients"
 		},
@@ -27,7 +28,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.highchartsNG.series = [];
 	}
 
-	$scope.addSeries = function(seriesname,data){
+	$scope.addSeries = function(seriesname,data,top){
 		$scope.highchartsNG.series.push({
 			name:seriesname,
 			data:[
@@ -43,13 +44,25 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 				data['november'],
 				data['december']
 				]
-		})
+		});
+		$scope.highchartsNG.topcontrib = [
+				top['january'],
+				top['febuary'],
+				top['march'],
+				top['april'],
+				top['may'],
+				top['june'],
+				top['july'],
+				top['august'],
+				top['oktober'],
+				top['september'],
+				top['november'],
+				top['december']
+			];
 	}
 
 	successFunctionIncoming = function(data){
 		$scope.incomingincidents = data;
-		console.log('Got INCOMING data, nr of entries : ' + data.length);
-
 		$scope.nrofincomingincidents = {};
 		$scope.nrofincomingincidents['january'] = 0;
 		$scope.nrofincomingincidents['febuary'] = 0;
@@ -168,7 +181,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 
 		}
 
-		$scope.addSeries('Incoming', $scope.nrofincomingincidents);
+		$scope.addSeries('Incoming', $scope.nrofincomingincidents, $scope.topsenders);
 
 	};
 
@@ -178,8 +191,6 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 	};
 
 	successFunctionOutgoing = function(data){
-		console.log('Got OUTGOING data, nr of entries : ' + data.length);
-
 		$scope.outgoingincidents = data;
 
 		$scope.nrofoutgoingincidents = {};
@@ -298,7 +309,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 			}
 		}
 
-		$scope.addSeries('Outgoing', $scope.nrofoutgoingincidents);
+		$scope.addSeries('Outgoing', $scope.nrofoutgoingincidents, $scope.topreceivers);
 	};
 
 	failureFunctionOutgoing = function(data){
