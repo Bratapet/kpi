@@ -5,4 +5,6 @@ angular.module('dnocKpi',
 	'MainCtrl', 
 	'INCCtrl', 
 	'IncomingService',
-	'OutgoingService']);
+	'OutgoingService',
+	'ui.bootstrap.datetimepicker',
+	'highcharts-ng']);

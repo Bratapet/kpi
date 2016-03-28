@@ -1,6 +1,50 @@
-angular.module('INCCtrl', ['IncomingService','OutgoingService']).controller('IncomingOutgoingController', function($scope, INCOMINGINC, OUTGOINGINC) {
+angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng']).controller('IncomingOutgoingController', function($scope, INCOMINGINC, OUTGOINGINC, $rootScope) {
 	
 	$scope.date = "2015" //set standard date to dispaly
+
+	$scope.highchartsNG = {
+		options:{
+			chart:{
+				type: 'column'
+			}
+		},
+		xAxis: {
+			categories:["january","febuary","march","april","may","june","july","august","september","november","december"]
+		},
+		yAxis:{
+			title:{
+				text: "Tickets"
+			}
+		},
+		series:[],
+		title: {
+			text: "Incoming And Outgoing Incidients"
+		},
+		loading:false
+	}
+
+	$scope.removeSeries = function(){
+		$scope.highchartsNG.series = [];
+	}
+
+	$scope.addSeries = function(seriesname,data){
+		$scope.highchartsNG.series.push({
+			name:seriesname,
+			data:[
+				data['january'],
+				data['febuary'],
+				data['march'],
+				data['april'],
+				data['may'],
+				data['june'],
+				data['july'],
+				data['august'],
+				data['oktober'],
+				data['november'],
+				data['december']
+				]
+		})
+	}
 
 	successFunctionIncoming = function(data){
 		$scope.incomingincidents = data;
@@ -61,6 +105,8 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService']).controller('Inc
 			}
 		}
 
+		$scope.addSeries('Incoming', $scope.nrofincomingincidents);
+
 	};
 
 	failureFunctionIncoming = function(data){
@@ -115,6 +161,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService']).controller('Inc
 			}
 		}
 
+		$scope.addSeries('Outgoing', $scope.nrofoutgoingincidents);
 	};
 
 	failureFunctionOutgoing = function(data){
@@ -122,7 +169,12 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService']).controller('Inc
 		console.log('Error: ' + data);
 	};	
 
-	INCOMINGINC.get(successFunctionIncoming, failureFunctionIncoming, $scope.date);
-	OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing, $scope.date);
+	$scope.setdate = function(data){
+		$scope.date = data;
+		$scope.removeSeries();
+		INCOMINGINC.get(successFunctionIncoming,failureFunctionIncoming, $scope.date);
+		OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing, $scope.date);
+	}
 
+	$scope.setdate($scope.date);
 });

@@ -1,6 +1,12 @@
 <div class="jumbotron text-center">
 	<h1>DNOC ticket statistics</h1>
 </div>
-<ul>
-	<li>{{nrofincomingincidents['january']}}</li>
-</ul>
+
+<highchart id="incomingChart" config="highchartsNG"></highchart>
+
+<div id="dateContainer">
+	<datetimepicker data-ng-model="date" data-datetimepicker-config="{startView: 'year', minView:'year', modelType: 'YYYY'}" data-on-set-time="setdate(date)"/>
+</div>
+
+
+

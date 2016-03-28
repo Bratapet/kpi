@@ -5,6 +5,8 @@
 		"bootstrap": "latest",
 		"angular": "latest",
 		"angular-route": "latest",
-		"d3": "latest"	
+		"highcharts-ng": "latest",
+		"highcharts" : "latest",
+		"moment" : "latest"
 	}
 }
