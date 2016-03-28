@@ -9,7 +9,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 			}
 		},
 		xAxis: {
-			categories:["january","febuary","march","april","may","june","july","august","september","november","december"]
+			categories:["January","Febuary","March","April","May","June","July","August","September","November","December"]
 		},
 		yAxis:{
 			title:{
@@ -18,7 +18,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		},
 		series:[],
 		title: {
-			text: "Incoming And Outgoing Incidients"
+			text: "Incoming and Outgoing Incidients"
 		},
 		loading:false
 	}
@@ -64,7 +64,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.nrofincomingincidents['november'] = 0;
 		$scope.nrofincomingincidents['december'] = 0;
 
-		for (i=0; i<data.length-1;i++){
+		for (i=0; i<data.length;i++){
 			switch (data[i].date) {
 				case $scope.date+"/01":
 					$scope.nrofincomingincidents['january'] += 1;
@@ -132,32 +132,44 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.nrofoutgoingincidents['november'] = 0;
 		$scope.nrofoutgoingincidents['december'] = 0;
 
-		for(i=0;i<data.length-1;i++){
+		for(i=0;i<data.length;i++){
 			switch(data[i].date){
 				case $scope.date+"/01":
 					$scope.nrofoutgoingincidents['january'] += 1;
+					break;
 				case $scope.date+"/02":
 					$scope.nrofoutgoingincidents['febuary'] += 1;
+					break;
 				case $scope.date+"/03":
 					$scope.nrofoutgoingincidents['march'] += 1;
+					break;
 				case $scope.date+"/04":
 					$scope.nrofoutgoingincidents['april'] += 1;
+					break;
 				case $scope.date+"/05":
 					$scope.nrofoutgoingincidents['may'] += 1;
+					break;
 				case $scope.date+"/06":
 					$scope.nrofoutgoingincidents['june'] += 1;
+					break;
 				case $scope.date+"/07":
 					$scope.nrofoutgoingincidents['july'] += 1;
+					break;
 				case $scope.date+"/08":
 					$scope.nrofoutgoingincidents['august'] += 1;
+					break;
 				case $scope.date+"/09":
 					$scope.nrofoutgoingincidents['september'] += 1;
+					break;
 				case $scope.date+"/10":
 					$scope.nrofoutgoingincidents['oktober'] += 1;
+					break;
 				case $scope.date+"/11":
 					$scope.nrofoutgoingincidents['november'] += 1;
+					break;
 				case $scope.date+"/12":
 					$scope.nrofoutgoingincidents['december'] += 1;
+					break;
 			}
 		}
 
@@ -169,10 +181,18 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		console.log('Error: ' + data);
 	};	
 
+	$scope.swapChartType = function(){
+		if($scope.highchartsNG.options.chart.type === 'column'){
+			$scope.highchartsNG.options.chart.type = 'line'
+		} else {
+			$scope.highchartsNG.options.chart.type = 'column'
+		}
+	}
+
 	$scope.setdate = function(data){
 		$scope.date = data;
 		$scope.removeSeries();
-		INCOMINGINC.get(successFunctionIncoming,failureFunctionIncoming, $scope.date);
+		INCOMINGINC.get(successFunctionIncoming, failureFunctionIncoming, $scope.date);
 		OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing, $scope.date);
 	}
 
