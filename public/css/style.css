@@ -1,27 +1,32 @@
-body { padding-top:30px; }
+body { padding-top:10px; }
 
-#topreceivers{
-	right: 0;
-	float:right;
-	position: relative;
+.container{
+	width: 100em;
+}
+
+#informationcontainer{
+	border:5px solid red;
+	width: auto;
+}
+
+#datetimepickercontainer{
+	border: 3px solid blue;
+	display: inline-block;
+	display:-moz-inline-stack;
 	margin:0 auto;
+	margin-right: 0px;
 }
 
 #topsenders{
-	float:left;
-	left:0;
-	position: relative;
+	border: 3px solid green;
+	display: inline-block;
+	display:-moz-inline-stack;
 	margin:0 auto;
+	padding-top: 0px;
 }
 
-#selectedmonth{
-	position: relative;
-	left: 0;
-	float:right;
-	margin:0 auto;
-}
-
-#datecontainer{
-	position: relative;
-	margin: 0 auto;
+#topreceivers{
+	border: 3px solid yellow;
+	display: inline-block;
+	display: -moz-inline-stack;
 }
