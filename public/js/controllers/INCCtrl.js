@@ -2,6 +2,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 	
 	$scope.date = "2015" //set standard date to dispaly
 	$scope.selectedmonth = "january"; // set standard month
+	var topnumber = 3; // set amount of senders and receivers to display
 	
 	$scope.topreceivers = {};
 	$scope.topreceivers['january'] = {};
@@ -323,6 +324,27 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 		$scope.removeSeries();
 		INCOMINGINC.get(successFunctionIncoming, failureFunctionIncoming, $scope.date);
 		OUTGOINGINC.get(successFunctionOutgoing, failureFunctionOutgoing, $scope.date);
+	}
+
+	$scope.sorttop = function(data){
+		var sortable = [];
+		for(var value in data){
+			sortable.push([value, data[value]]);
+		}
+
+		sortable.sort(function(a,b){return b[1] - a[1]})
+		var returndata = {};
+		
+		if (sortable.length > 0){
+			for (var i = 0; i <= topnumber; i++) {
+				returndata[sortable[i][0]] = sortable[i][1]
+			}
+			return returndata;
+		}else{
+			return data;
+		}
+
+		
 	}
 
 	$scope.setdate($scope.date);
