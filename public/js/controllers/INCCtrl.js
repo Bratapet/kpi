@@ -2,7 +2,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 	
 	$scope.date = "2015" //set standard date to dispaly
 	$scope.selectedmonth = "january"; // set standard month
-	var topnumber = 3; // set amount of senders and receivers to display
+	var topnumber = 5; // set amount of senders and receivers to display
 	
 	$scope.topreceivers = {};
 	$scope.topreceivers['january'] = {};
