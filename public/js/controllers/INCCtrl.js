@@ -38,7 +38,7 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 			},
 		},
 		xAxis: {
-			categories:["january","febuary","march","april","may","june","july","august","September","November","December"]
+			categories:["january","febuary","march","april","may","june","july","august","september","november","december"]
 		},
 		yAxis:{
 			title:{
@@ -75,9 +75,8 @@ angular.module('INCCtrl', ['IncomingService','OutgoingService','highcharts-ng'])
 				],
 			events:{
 				click:function(e){
-					console.log($scope.selectedmonth);
 					$scope.selectedmonth = e.point.category;
-					console.log($scope.selectedmonth);
+					$scope.$apply();
 				}
 			}
 		});

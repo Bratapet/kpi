@@ -17,8 +17,8 @@
 <div id="topsenders">
 	Senders: 
 	<div ng-repeat="(key,value) in topsenders" ng-if="key==selectedmonth">
-		<ul ng-repeat="(item, amount) in value">
-			<li>{{item}}:{{amount}}</li>
+		<ul>
+			<li ng-repeat="(item, amount) in value">{{item}} : {{amount}}</li>
 		</ul>
 	</div>
 </div>
@@ -27,8 +27,8 @@
 <div id="topreceivers">
 	Receivers: 
 	<div ng-repeat="(key,value) in topreceivers" ng-if="key==selectedmonth">
-		<ul ng-repeat="(item, amount) in value">
-			<li>{{item}}:{{amount}}</li>
+		<ul>
+			<li ng-repeat="(item, amount) in value">{{item}} : {{amount}}</li>
 		</ul>
 	</div>
 </div>
